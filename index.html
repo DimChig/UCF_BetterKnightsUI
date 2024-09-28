@@ -40,6 +40,18 @@
         .table .instructor-col {
             min-width: 250px;
         }
+        .section-col {
+            display: flex;
+            align-items: center;
+        }
+        .section-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        .section-info {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
@@ -62,7 +74,15 @@
             <tbody>
                 <tr>
                     <td>80105</td>
-                    <td class="extended-col">0002-REG (Regular)</td>
+                    <td class="extended-col">
+                        <div class="section-col">
+                            <span class="section-icon">📚</span>
+                            <div class="section-info">
+                                <span>LEC</span>
+                                <small>002-REGULAR</small>
+                            </div>
+                        </div>
+                    </td>
                     <td class="extended-col">In Person (P)</td>
                     <td>
                         <div class="day-boxes">
@@ -71,8 +91,6 @@
                             <div class="day-box filled">W</div>
                             <div class="day-box">Th</div>
                             <div class="day-box filled">F</div>
-                            <div class="day-box">Sa</div>
-                            <div class="day-box">Su</div>
                         </div>
                         <div>9:00AM - 11:00AM</div>
                         <div><small>M/W/F</small></div>
@@ -80,10 +98,73 @@
                     <td class="extended-col"><a href="#" class="btn btn-link btn-sm">CB2 101</a></td>
                     <td class="instructor-col">
                         <div>Dr. John Smith <span class="badge bg-secondary">4.6/5</span> <span class="badge bg-info">157</span></div>
-                        <div>Prof. Jane Doe <span class="badge bg-secondary">4.7/5</span> <span class="badge bg-info">2</span></div>
                     </td>
                     <td>01/06/2025 - 04/19/2025</td>
                     <td><span class="badge bg-success">Open</span></td>
+                    <td><a href="#" class="btn btn-outline-primary btn-xs">Syllabus</a></td>
+                    <td><button class="btn btn-primary btn-sm">Select</button></td>
+                </tr>
+                <tr>
+                    <td>80106</td>
+                    <td class="extended-col">
+                        <div class="section-col">
+                            <span class="section-icon">🧪</span>
+                            <div class="section-info">
+                                <span>LAB</span>
+                                <small>003-REGULAR</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="extended-col">In Person (P)</td>
+                    <td>
+                        <div class="day-boxes">
+                            <div class="day-box">M</div>
+                            <div class="day-box filled">Tu</div>
+                            <div class="day-box">W</div>
+                            <div class="day-box filled">Th</div>
+                            <div class="day-box">F</div>
+                        </div>
+                        <div>2:00PM - 4:00PM</div>
+                        <div><small>Tu/Th</small></div>
+                    </td>
+                    <td class="extended-col"><a href="#" class="btn btn-link btn-sm">SCI 305</a></td>
+                    <td class="instructor-col">
+                        <div>Dr. Emily Chen <span class="badge bg-secondary">4.8/5</span> <span class="badge bg-info">92</span></div>
+                    </td>
+                    <td>01/06/2025 - 04/19/2025</td>
+                    <td><span class="badge bg-warning text-dark">Waitlist</span></td>
+                    <td><a href="#" class="btn btn-outline-primary btn-xs">Syllabus</a></td>
+                    <td><button class="btn btn-primary btn-sm">Select</button></td>
+                </tr>
+                <tr>
+                    <td>80107</td>
+                    <td class="extended-col">
+                        <div class="section-col">
+                            <span class="section-icon">💬</span>
+                            <div class="section-info">
+                                <span>SEM</span>
+                                <small>001-REGULAR</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="extended-col">Online</td>
+                    <td>
+                        <div class="day-boxes">
+                            <div class="day-box">M</div>
+                            <div class="day-box">Tu</div>
+                            <div class="day-box filled">W</div>
+                            <div class="day-box">Th</div>
+                            <div class="day-box">F</div>
+                        </div>
+                        <div>6:00PM - 8:00PM</div>
+                        <div><small>W</small></div>
+                    </td>
+                    <td class="extended-col"><a href="#" class="btn btn-link btn-sm">ONLINE</a></td>
+                    <td class="instructor-col">
+                        <div>Prof. Michael Brown <span class="badge bg-secondary">4.5/5</span> <span class="badge bg-info">78</span></div>
+                    </td>
+                    <td>01/06/2025 - 04/19/2025</td>
+                    <td><span class="badge bg-danger">Closed</span></td>
                     <td><a href="#" class="btn btn-outline-primary btn-xs">Syllabus</a></td>
                     <td><button class="btn btn-primary btn-sm">Select</button></td>
                 </tr>
