@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Information Table</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         .table-hover tbody tr:hover {
             background-color: #f5f5f5;
@@ -40,15 +41,17 @@
         .table .instructor-col {
             min-width: 250px;
         }
-        .section-col {
+        .section-col, .mode-col {
             display: flex;
             align-items: center;
         }
-        .section-icon {
+        .section-icon, .mode-icon {
             font-size: 1.5rem;
             margin-right: 10px;
+            width: 30px;
+            text-align: center;
         }
-        .section-info {
+        .section-info, .mode-info {
             display: flex;
             flex-direction: column;
         }
@@ -76,14 +79,19 @@
                     <td>80105</td>
                     <td class="extended-col">
                         <div class="section-col">
-                            <span class="section-icon">📚</span>
+                            <i class="fas fa-chalkboard-teacher section-icon"></i>
                             <div class="section-info">
                                 <span>LEC</span>
                                 <small>002-REGULAR</small>
                             </div>
                         </div>
                     </td>
-                    <td class="extended-col">In Person (P)</td>
+                    <td class="extended-col">
+                        <div class="mode-col">
+                            <i class="fas fa-user mode-icon"></i>
+                            <div class="mode-info">In Person</div>
+                        </div>
+                    </td>
                     <td>
                         <div class="day-boxes">
                             <div class="day-box filled">M</div>
@@ -108,14 +116,19 @@
                     <td>80106</td>
                     <td class="extended-col">
                         <div class="section-col">
-                            <span class="section-icon">🧪</span>
+                            <i class="fas fa-flask section-icon"></i>
                             <div class="section-info">
                                 <span>LAB</span>
                                 <small>003-REGULAR</small>
                             </div>
                         </div>
                     </td>
-                    <td class="extended-col">In Person (P)</td>
+                    <td class="extended-col">
+                        <div class="mode-col">
+                            <i class="fas fa-sync mode-icon"></i>
+                            <div class="mode-info">Mixed</div>
+                        </div>
+                    </td>
                     <td>
                         <div class="day-boxes">
                             <div class="day-box">M</div>
@@ -140,14 +153,19 @@
                     <td>80107</td>
                     <td class="extended-col">
                         <div class="section-col">
-                            <span class="section-icon">💬</span>
+                            <i class="fas fa-comments section-icon"></i>
                             <div class="section-info">
                                 <span>SEM</span>
                                 <small>001-REGULAR</small>
                             </div>
                         </div>
                     </td>
-                    <td class="extended-col">Online</td>
+                    <td class="extended-col">
+                        <div class="mode-col">
+                            <i class="fas fa-laptop mode-icon"></i>
+                            <div class="mode-info">Online</div>
+                        </div>
+                    </td>
                     <td>
                         <div class="day-boxes">
                             <div class="day-box">M</div>
