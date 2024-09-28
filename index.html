@@ -7,6 +7,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --bs-primary-200: #9ec5fe;
+            --bs-success-200: #a3cfbb;
+            --bs-info-200: #a7e9f4;
+            --bs-warning-200: #ffe69c;
+            --bs-danger-200: #f1aeb5;
+            --bs-secondary-200: #e2e3e5;
+            --bs-red-200: #f8d7da;
+        }
         .table-hover tbody tr:hover {
             background-color: rgba(0,0,0,.075);
         }
@@ -32,8 +41,8 @@
             font-weight: bold;
         }
         .day-box.filled {
-            background-color: var(--bs-primary);
-            color: white;
+            background-color: var(--bs-primary-200);
+            color: var(--bs-dark);
         }
         .table .extended-col {
             min-width: 150px;
@@ -62,7 +71,8 @@
             margin-right: 8px;
         }
         .section-info {
-            font-size: 0.9em;
+            font-size: 0.8em; /* Slightly smaller text */
+            color: #6c757d; /* Muted text color */
         }
         .mode-icon {
             margin-right: 8px;
@@ -71,12 +81,34 @@
         .table-striped > tbody > tr:nth-of-type(odd) > * {
             --bs-table-accent-bg: var(--bs-table-striped-bg);
         }
+        .bg-primary-200 { background-color: var(--bs-primary-200) !important; }
+        .bg-success-200 { background-color: var(--bs-success-200) !important; }
+        .bg-info-200 { background-color: var(--bs-info-200) !important; }
+        .bg-warning-200 { background-color: var(--bs-warning-200) !important; }
+        .bg-danger-200 { background-color: var(--bs-danger-200) !important; }
+        .bg-secondary-200 { background-color: var(--bs-secondary-200) !important; }
+        .bg-red-200 { background-color: var(--bs-red-200) !important; } /* Red background for SEM */
+        .text-dark { color: var(--bs-dark) !important; }
+
+        /* Professor rating colors */
+        .rating-high {
+            background-color: #f0fbf1; /* Subtle green background */
+            color: rgba(57, 198, 69, 1); /* Green text */
+        }
+        .rating-medium {
+            background-color: #fffaec; /* Subtle yellow background */
+            color: rgba(249, 188, 6, 1); /* Yellow text */
+        }
+        .rating-low {
+            background-color: #fcefef; /* Subtle red background */
+            color: rgba(210, 45, 45, 1); /* Red text */
+        }
     </style>
 </head>
 <body>
     <div class="container-fluid mt-5">
         <table class="table table-bordered table-hover table-striped">
-            <thead class="table-primary">
+            <thead class="bg-primary-200 text-dark">
                 <tr>
                     <th>Class ID</th>
                     <th class="extended-col">Section</th>
@@ -95,11 +127,11 @@
                     <td>80105</td>
                     <td class="extended-col">
                         <div class="section-col">
-                            <div class="section-type bg-primary text-white">
+                            <div class="section-type bg-primary-200 text-dark">
                                 <i class="fas fa-chalkboard-teacher section-icon"></i>
                                 LEC
                             </div>
-                            <div class="section-info text-muted">002-REGULAR</div>
+                            <div class="section-info">002-REGULAR</div>
                         </div>
                     </td>
                     <td class="extended-col">
@@ -121,22 +153,22 @@
                     </td>
                     <td class="extended-col"><a href="#" class="btn btn-outline-primary btn-sm">CB2 101</a></td>
                     <td class="instructor-col">
-                        <div>Dr. John Smith <span class="badge bg-secondary">4.6/5</span> <span class="badge bg-info">157</span></div>
+                        <div>Dr. John Smith <span class="badge rating-high">4.6/5</span> <span class="badge bg-info-200 text-dark">157</span></div>
                     </td>
                     <td>01/06/2025 - 04/19/2025</td>
-                    <td><span class="badge bg-success">Open</span></td>
+                    <td><span class="badge bg-success-200 text-dark">Open</span></td>
                     <td><a href="#" class="btn btn-outline-info btn-xs">Syllabus</a></td>
-                    <td><button class="btn btn-primary btn-sm">Select</button></td>
+                    <td><button class="btn btn-primary-200 text-dark btn-sm">Select</button></td>
                 </tr>
                 <tr>
                     <td>80106</td>
                     <td class="extended-col">
                         <div class="section-col">
-                            <div class="section-type bg-danger text-white">
+                            <div class="section-type bg-success-200 text-dark">
                                 <i class="fas fa-flask section-icon"></i>
                                 LAB
                             </div>
-                            <div class="section-info text-muted">003-REGULAR</div>
+                            <div class="section-info">003-REGULAR</div>
                         </div>
                     </td>
                     <td class="extended-col">
@@ -158,22 +190,22 @@
                     </td>
                     <td class="extended-col"><a href="#" class="btn btn-outline-primary btn-sm">SCI 305</a></td>
                     <td class="instructor-col">
-                        <div>Dr. Emily Chen <span class="badge bg-secondary">4.8/5</span> <span class="badge bg-info">92</span></div>
+                        <div>Dr. Emily Chen <span class="badge rating-high">4.8/5</span> <span class="badge bg-info-200 text-dark">92</span></div>
                     </td>
                     <td>01/06/2025 - 04/19/2025</td>
-                    <td><span class="badge bg-warning text-dark">Waitlist</span></td>
+                    <td><span class="badge bg-warning-200 text-dark">Waitlist</span></td>
                     <td><a href="#" class="btn btn-outline-info btn-xs">Syllabus</a></td>
-                    <td><button class="btn btn-primary btn-sm">Select</button></td>
+                    <td><button class="btn btn-primary-200 text-dark btn-sm">Select</button></td>
                 </tr>
                 <tr>
                     <td>80107</td>
                     <td class="extended-col">
                         <div class="section-col">
-                            <div class="section-type bg-info text-white">
+                            <div class="section-type bg-red-200 text-dark">
                                 <i class="fas fa-comments section-icon"></i>
                                 SEM
                             </div>
-                            <div class="section-info text-muted">001-REGULAR</div>
+                            <div class="section-info">001-REGULAR</div>
                         </div>
                     </td>
                     <td class="extended-col">
@@ -195,12 +227,12 @@
                     </td>
                     <td class="extended-col"><a href="#" class="btn btn-outline-primary btn-sm">ONLINE</a></td>
                     <td class="instructor-col">
-                        <div>Prof. Michael Brown <span class="badge bg-secondary">4.5/5</span> <span class="badge bg-info">78</span></div>
+                        <div>Prof. Michael Brown <span class="badge rating-high">4.5/5</span> <span class="badge bg-info-200 text-dark">78</span></div>
                     </td>
                     <td>01/06/2025 - 04/19/2025</td>
-                    <td><span class="badge bg-danger">Closed</span></td>
+                    <td><span class="badge bg-danger-200 text-dark">Closed</span></td>
                     <td><a href="#" class="btn btn-outline-info btn-xs">Syllabus</a></td>
-                    <td><button class="btn btn-primary btn-sm">Select</button></td>
+                    <td><button class="btn btn-primary-200 text-dark btn-sm">Select</button></td>
                 </tr>
             </tbody>
         </table>
