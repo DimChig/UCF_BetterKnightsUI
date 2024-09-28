@@ -1,0 +1,28 @@
+{
+    "manifest_version": 1.0,
+    "name": "BetterKnightsUI",
+    "version": "1.0",
+    "description": "UCF Course Navigation Revamp",
+    "permissions": [
+        
+    ],
+    "action": {
+
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "icons": {
+
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["*://my.ucf.edu/*"]
+        }
+    ],
+
+    "host_permissions": [
+
+    ]
+}
