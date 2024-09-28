@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         .table-hover tbody tr:hover {
-            background-color: #f5f5f5;
+            background-color: rgba(0,0,0,.075);
         }
         .btn-xs {
             padding: .25rem .4rem;
@@ -32,7 +32,7 @@
             font-weight: bold;
         }
         .day-box.filled {
-            background-color: #007bff;
+            background-color: var(--bs-primary);
             color: white;
         }
         .table .extended-col {
@@ -41,26 +41,42 @@
         .table .instructor-col {
             min-width: 250px;
         }
-        .section-col, .mode-col {
+        .section-col {
+            display: flex;
+            flex-direction: column;
+        }
+        .mode-col {
             display: flex;
             align-items: center;
         }
-        .section-icon, .mode-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
-            width: 30px;
-            text-align: center;
-        }
-        .section-info, .mode-info {
+        .section-type {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 4px;
+            width: fit-content;
+        }
+        .section-icon {
+            margin-right: 8px;
+        }
+        .section-info {
+            font-size: 0.9em;
+        }
+        .mode-icon {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) > * {
+            --bs-table-accent-bg: var(--bs-table-striped-bg);
         }
     </style>
 </head>
 <body>
     <div class="container-fluid mt-5">
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="table-primary">
                 <tr>
                     <th>Class ID</th>
                     <th class="extended-col">Section</th>
@@ -79,17 +95,17 @@
                     <td>80105</td>
                     <td class="extended-col">
                         <div class="section-col">
-                            <i class="fas fa-chalkboard-teacher section-icon"></i>
-                            <div class="section-info">
-                                <span>LEC</span>
-                                <small>002-REGULAR</small>
+                            <div class="section-type bg-primary text-white">
+                                <i class="fas fa-chalkboard-teacher section-icon"></i>
+                                LEC
                             </div>
+                            <div class="section-info text-muted">002-REGULAR</div>
                         </div>
                     </td>
                     <td class="extended-col">
                         <div class="mode-col">
-                            <i class="fas fa-user mode-icon"></i>
-                            <div class="mode-info">In Person</div>
+                            <i class="fas fa-user mode-icon text-success"></i>
+                            <span>In Person</span>
                         </div>
                     </td>
                     <td>
@@ -101,32 +117,32 @@
                             <div class="day-box filled">F</div>
                         </div>
                         <div>9:00AM - 11:00AM</div>
-                        <div><small>M/W/F</small></div>
+                        <div><small class="text-muted">M/W/F</small></div>
                     </td>
-                    <td class="extended-col"><a href="#" class="btn btn-link btn-sm">CB2 101</a></td>
+                    <td class="extended-col"><a href="#" class="btn btn-outline-primary btn-sm">CB2 101</a></td>
                     <td class="instructor-col">
                         <div>Dr. John Smith <span class="badge bg-secondary">4.6/5</span> <span class="badge bg-info">157</span></div>
                     </td>
                     <td>01/06/2025 - 04/19/2025</td>
                     <td><span class="badge bg-success">Open</span></td>
-                    <td><a href="#" class="btn btn-outline-primary btn-xs">Syllabus</a></td>
+                    <td><a href="#" class="btn btn-outline-info btn-xs">Syllabus</a></td>
                     <td><button class="btn btn-primary btn-sm">Select</button></td>
                 </tr>
                 <tr>
                     <td>80106</td>
                     <td class="extended-col">
                         <div class="section-col">
-                            <i class="fas fa-flask section-icon"></i>
-                            <div class="section-info">
-                                <span>LAB</span>
-                                <small>003-REGULAR</small>
+                            <div class="section-type bg-danger text-white">
+                                <i class="fas fa-flask section-icon"></i>
+                                LAB
                             </div>
+                            <div class="section-info text-muted">003-REGULAR</div>
                         </div>
                     </td>
                     <td class="extended-col">
                         <div class="mode-col">
-                            <i class="fas fa-sync mode-icon"></i>
-                            <div class="mode-info">Mixed</div>
+                            <i class="fas fa-circle-half-stroke mode-icon text-warning"></i>
+                            <span>Mixed</span>
                         </div>
                     </td>
                     <td>
@@ -138,32 +154,32 @@
                             <div class="day-box">F</div>
                         </div>
                         <div>2:00PM - 4:00PM</div>
-                        <div><small>Tu/Th</small></div>
+                        <div><small class="text-muted">Tu/Th</small></div>
                     </td>
-                    <td class="extended-col"><a href="#" class="btn btn-link btn-sm">SCI 305</a></td>
+                    <td class="extended-col"><a href="#" class="btn btn-outline-primary btn-sm">SCI 305</a></td>
                     <td class="instructor-col">
                         <div>Dr. Emily Chen <span class="badge bg-secondary">4.8/5</span> <span class="badge bg-info">92</span></div>
                     </td>
                     <td>01/06/2025 - 04/19/2025</td>
                     <td><span class="badge bg-warning text-dark">Waitlist</span></td>
-                    <td><a href="#" class="btn btn-outline-primary btn-xs">Syllabus</a></td>
+                    <td><a href="#" class="btn btn-outline-info btn-xs">Syllabus</a></td>
                     <td><button class="btn btn-primary btn-sm">Select</button></td>
                 </tr>
                 <tr>
                     <td>80107</td>
                     <td class="extended-col">
                         <div class="section-col">
-                            <i class="fas fa-comments section-icon"></i>
-                            <div class="section-info">
-                                <span>SEM</span>
-                                <small>001-REGULAR</small>
+                            <div class="section-type bg-info text-white">
+                                <i class="fas fa-comments section-icon"></i>
+                                SEM
                             </div>
+                            <div class="section-info text-muted">001-REGULAR</div>
                         </div>
                     </td>
                     <td class="extended-col">
                         <div class="mode-col">
-                            <i class="fas fa-laptop mode-icon"></i>
-                            <div class="mode-info">Online</div>
+                            <i class="fas fa-laptop mode-icon text-secondary"></i>
+                            <span>Online</span>
                         </div>
                     </td>
                     <td>
@@ -175,15 +191,15 @@
                             <div class="day-box">F</div>
                         </div>
                         <div>6:00PM - 8:00PM</div>
-                        <div><small>W</small></div>
+                        <div><small class="text-muted">W</small></div>
                     </td>
-                    <td class="extended-col"><a href="#" class="btn btn-link btn-sm">ONLINE</a></td>
+                    <td class="extended-col"><a href="#" class="btn btn-outline-primary btn-sm">ONLINE</a></td>
                     <td class="instructor-col">
                         <div>Prof. Michael Brown <span class="badge bg-secondary">4.5/5</span> <span class="badge bg-info">78</span></div>
                     </td>
                     <td>01/06/2025 - 04/19/2025</td>
                     <td><span class="badge bg-danger">Closed</span></td>
-                    <td><a href="#" class="btn btn-outline-primary btn-xs">Syllabus</a></td>
+                    <td><a href="#" class="btn btn-outline-info btn-xs">Syllabus</a></td>
                     <td><button class="btn btn-primary btn-sm">Select</button></td>
                 </tr>
             </tbody>
