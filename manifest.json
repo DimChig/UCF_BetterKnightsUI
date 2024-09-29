@@ -1,28 +1,40 @@
 {
-    "manifest_version": 1.0,
-    "name": "BetterKnightsUI",
-    "version": "1.0",
-    "description": "UCF Course Navigation Revamp",
-    "permissions": [
-        
-    ],
-    "action": {
-
-    },
-    "background": {
-        "service_worker": "background.js"
-    },
-    "icons": {
-
-    },
-
-    "content_scripts": [
-        {
-            "matches": ["*://my.ucf.edu/*"]
-        }
-    ],
-
-    "host_permissions": [
-
-    ]
+  "manifest_version": 3,
+  "name": "BetterKnightsUI",
+  "version": "1.0",
+  "description": "UCF Course Navigation Revamp",
+  "permissions": [
+    "https://www.ratemyprofessors.com/",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.ratemyprofessors.com/"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/popup_icon.png"
+  },
+  "icons": {},
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/main_script.js",
+        "scripts/table_generator.js",
+        "scripts/datatables.min.js",
+        "scripts/rateMyProfessorAPI.js"
+      ],
+      "css": [
+        "css/style.css",
+        "css/datatables.min.css"
+      ],
+      "matches": [
+        "https://csprod-ss.net.ucf.edu/psc/CSPROD/EMPLOYEE/CSPROD/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  }
 }
