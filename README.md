@@ -38,5 +38,5 @@ Santiago Henao Rojas
 Diab Ali
 Anna Russel
 
-Acknowledgements
+Acknowledgements:
 We would like to thank Assurant for inspiring this project and providing the challenge that allowed us to build this solution. We also thank the organizers of Shellhacks 2024 for providing this platform.
