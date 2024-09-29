@@ -17,7 +17,7 @@ Installation:
 To install BetterKnightsUI and start improving your UCF course selection experience:
 Clone this repository to your local machine:
 Copy code:
-git clone https://github.com/your-username/BetterKnightsUI.git
+git clone https://github.com/DimChig/UCF_BetterKnightsUI
 
 Open Google Chrome and navigate to chrome://extensions/.
 Enable Developer Mode in the top-right corner.
