@@ -32,7 +32,7 @@ function generateBadgeRatingAmount(ratings_amount) {
     return el;
 }
 
-function getTimeSortingValue(timeString) {
+function getTimeSortingValue(timeString) {  
     if (!timeString) {
         return Number.MAX_SAFE_INTEGER; // Very large value if timeString is null
     }
@@ -61,7 +61,7 @@ function getTimeSortingValue(timeString) {
 
 function generateTableInContainerWithData(container, data) {
     //Check if already added
-    if (container.find("dimchig-table").length > 0) return;
+    if (container.find("dimchig-table").length > 0) return false;
 
     // Create the table structure with jQuery
     const $table = $('<table class="table dimchig-table table-striped table-bordered table-hover">').css({
@@ -69,7 +69,7 @@ function generateTableInContainerWithData(container, data) {
     }).append(`
               <thead>
                   <tr>
-                      <th scope="col">Class ID</th>
+                      <th scope="col">ID</th>
                       <th scope="col">Status</th> 
                       <th scope="col">Section</th>
                       <th scope="col">Mode</th>
@@ -77,7 +77,7 @@ function generateTableInContainerWithData(container, data) {
                       <th scope="col">Instructor</th>
                       <th scope="col">Room</th>                      
                       <th scope="col">Meeting Dates</th>                                                          
-                      <th scope="col">Select</th>
+                      <th scope="col">DimChig</th>
                   </tr>
               </thead>
               <tbody class='table-light'></tbody>
@@ -91,14 +91,16 @@ function generateTableInContainerWithData(container, data) {
         // Create a new <tr> element
         const $row = $('<tr>');
 
-        // Class ID column
+        /// Class ID column
         const $classId = $('<td style="text-align: center" data-order="' + item.class + '">');
         if (item.class !== null) {
             let _class_el = item.elements.classElement;
             if (_class_el) {
+                // Apply the copied font-family to _class_el
                 $($(_class_el).find("a")).css({
                     "color": "black",
-                });
+                }).addClass('font-dimchig-table');
+
                 $classId.append(_class_el);
             } else {
                 $classId.text(item.class);
@@ -113,25 +115,25 @@ function generateTableInContainerWithData(container, data) {
         status_badge_text = "?";
         const statusMappings = {
             0: {
-                label: 'Open',
+                label: 'OPEN',
                 style: "badge-green"
             },
             1: {
-                label: 'Waitlist',
+                label: 'WAITLIST',
                 style: "badge-yellow"
             },
             2: {
-                label: 'Closed',
+                label: 'CLOSED',
                 style: "badge-red"
             }
         };
-
+        //item.status = Math.floor(Math.random() * 3);
         // Check if item.status is valid and apply the corresponding badge style
         if (item.status !== null && statusMappings.hasOwnProperty(item.status)) {
             status_badge_style = statusMappings[item.status].style;
             status_badge_text = statusMappings[item.status].label;
         }
-        const $status = $('<td style="text-align: center; " data-order="' + item.status + '">').html(`<span class="badge ${status_badge_style}" style="font-size: 0.75rem;">${status_badge_text}</span>`);
+        const $status = $('<td style="text-align: center; " data-order="' + item.status + '">').html(`<span class="badge ${status_badge_style} badge-hover" style="font-size: 0.7rem;">${status_badge_text}</span>`);
 
 
 
@@ -182,9 +184,10 @@ function generateTableInContainerWithData(container, data) {
             "margin-right": "5px",
         });
         const $text = $('<span>' + section_text + '</span>');
-        const $badge = $('<span class="badge ' + section_badge_style + '"></span>');
+        const $badge = $('<span class="badge badge-hover ' + section_badge_style + '"></span>');
         $badge.css({
             "width": "fit-content",
+            "font-size": "0.65rem",
         });
 
         // Append icon (if it exists) and text to the badge
@@ -193,13 +196,18 @@ function generateTableInContainerWithData(container, data) {
 
         // Create the section description
         const $sectionInfo = $("<div class='section-info'></div>");
-        $sectionInfo.css("align-items", "center");
+        $sectionInfo.css({
+          "align-items": "center",
+          "position": "relative",
+        });
         const $description = $('<small>');
         if (item.section && item.section.description) {
             $description.text(item.section.description);
         }
         $description.css({
             "color": "#2125294d",
+            "position": "absolute",
+            "top": "18px",
         });
 
         // Append the description to the section info div
@@ -279,14 +287,15 @@ function generateTableInContainerWithData(container, data) {
         let $mode_row_text = $("<span class=''>" + modeText + "</span>");
 
         let $mode_row = $("<span></span>");
-        $mode_row.addClass("badge " + modeBadgeStyle);
+        $mode_row.addClass("badge badge-hover " + modeBadgeStyle);
         $mode_row.css({
             'display': 'flex',
             'flex-direction': 'row',
             'width': 'fit-content',
             'justify-content': 'left',
             'text-align': 'left',
-            'margin': 'auto'
+            'margin': 'auto',
+            'font-size': modeText.length < 15 ? '0.65rem' : '0.6rem',
         });
         $mode_row.append($mode_row_icon).append($mode_row_text);
 
@@ -297,7 +306,7 @@ function generateTableInContainerWithData(container, data) {
 
         //DAYS AND TIMES
         let _startTime = null;
-        if (item.daysAndTimes && item.daysAndTimes.length > 0 && item.daysAndTimes[0].startTime) _startTime = item.daysAndTimes[0].start_time
+        if (item.daysAndTimes && item.daysAndTimes.length > 0 && item.daysAndTimes[0].start_time) _startTime = item.daysAndTimes[0].start_time
         const $daysAndTime = $('<td data-order=' + getTimeSortingValue(_startTime) + '></td>');
         $daysAndTime.css({
             "text-align": "center",
@@ -468,15 +477,17 @@ function generateTableInContainerWithData(container, data) {
 
 
         // Meeting Dates column
-        let meeting_dates_text = "";
+        let meeting_dates_html = "";
         if (item.meetingDates && item.meetingDates !== null) {
             meeting_dates_text = item.meetingDates;
             if (meeting_dates_text.includes("-")) {
                 let split = meeting_dates_text.split("-");
-                meeting_dates_text = split[0].trim() + " -<br>" + split[1].trim();
+                meeting_dates_html += "<span style='display: block'>" + split[0].trim() + "</span>";
+                meeting_dates_html += "<span style='position: absolute; right: 20px; top: calc(50% - 9.5px);'>-</span>";
+                meeting_dates_html += "<span style='display: block'>" + split[1].trim() + "</span>";
             }
         }
-        const $meetingDates = $('<td>').html(meeting_dates_text);
+        const $meetingDates = $('<td style="position: relative">').html(meeting_dates_html);
 
         // BUTTON & SYLLABUS
 
@@ -558,10 +569,44 @@ function generateTableInContainerWithData(container, data) {
     $(".dt-search").css("display", "none");
     $("#DataTables_Table_0_filter").css("display", "none");
 
+    $('.dimchig-table th span').filter(function() {
+        return $(this).text() === "DimChig";
+    }).each(function() {
+        // Apply CSS to the span itself
+        $(this).css({
+            'opacity': '0.05',
+            'cursor': 'pointer',
+            'transition': 'opacity 0.2s' // Smooth transition for the opacity change
+        });
+        $(this).hover(
+            function() {
+                $(this).css({
+                  'opacity': '0.5',
+                  'color': '#0d6efd',
+                }); // On mouse enter
+            },
+            function() {
+                $(this).css({
+                'opacity': '0.05',
+                'color': 'black',
+                }); // On mouse leave
+            }
+        );
+        // Apply CSS to the parent th
+        $(this).parent().get(0).style.setProperty('text-align', 'center', 'important');
+        $(this).parent().find(".dt-column-order").remove();
+
+        // on click parent -> open instagram page _blank
+        $(this).parent().on('click', function() {
+          window.open('https://www.instagram.com/dimchig_', '_blank');
+      });      
+    });
+
+
 
     // Rate my proffessor
     collectAndProcessProfNames();
-
+    return true;
 }
 
 

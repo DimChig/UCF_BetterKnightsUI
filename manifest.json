@@ -1,20 +1,25 @@
 {
   "manifest_version": 3,
-  "name": "BetterKnightsUI",
-  "version": "1.0",
-  "description": "UCF Course Navigation Revamp",
-  "permissions": [
-    "https://www.ratemyprofessors.com/",
+  "name": "BetterKnightsUI - New Look for myUCF",
+  "version": "1.4", 
+  "description": "Makes myUCF cleaner and easier to navigate for a better course browsing experience!",
+  "permissions": [    
     "storage"
   ],
   "host_permissions": [
-    "https://www.ratemyprofessors.com/"
+    "*://www.ratemyprofessors.com/"
   ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "images/popup_icon.png"
   },
   "icons": {},
+  "web_accessible_resources": [
+    {
+      "resources": ["images/popup_icon_128.png"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "content_scripts": [
     {
       "js": [
@@ -22,14 +27,16 @@
         "scripts/main_script.js",
         "scripts/table_generator.js",
         "scripts/datatables.min.js",
-        "scripts/rateMyProfessorAPI.js"
+        "scripts/rateMyProfessorAPI.js",
+        "scripts/bootstrap.min.js"
       ],
       "css": [
         "css/style.css",
         "css/datatables.min.css"
       ],
       "matches": [
-        "https://csprod-ss.net.ucf.edu/psc/CSPROD/EMPLOYEE/CSPROD/*"
+        "https://csprod-ss.net.ucf.edu/psc/CSPROD/EMPLOYEE/CSPROD/*",
+        "https://my.ucf.edu/psp/IHPROD/EMPLOYEE/CSPROD/*"
       ],
       "all_frames": true
     }

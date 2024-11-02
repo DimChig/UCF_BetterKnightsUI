@@ -11,6 +11,35 @@
 
 .dimchig-table th {
 	white-space: nowrap;
+	text-align: left !important;
+	color: red;
+}
+
+.dimchig-table {
+    font-family: Arimo, "Albert Sans", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif !important;
+
+}
+.font-dimchig-table {
+	font-family: Arimo, "Albert Sans", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif !important;
+} 
+
+.text-center-important {
+    text-align: center !important;
+}
+
+.PSHYPERLINK.PTCOLLAPSE_ARROW::before, .PSHYPERLINK.PTEXPAND_ARROW::before  { 
+	content: none !important; 
+}
+
+.PSPUSHBUTTON {
+	height: fit-content !important;
+}
+
+.PSPUSHBUTTON input {
+	padding: 0px !important;
+	margin: 0px !important;
+	position: relative !important;
+    top: -1px !important;
 }
 
 .btn-xs {
@@ -105,4 +134,16 @@
 
 .text-muted-2 {
 	color: #2125293d !important;
+}
+
+#copyLinkBtn {
+	text-align: right;
+}
+
+.my-card-title {
+	text-align: center;	
+}
+
+.dimchig-placeholder::placeholder {	
+    opacity: 0.3 !important;
 }

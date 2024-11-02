@@ -1,4 +1,4 @@
-window.getWindowContainer = function() {
+window.getWindowClassSearchTableContainer = function() {
     let element1 = $('td.PSGROUPBOXLABEL:contains("class section(s) found")');
     let element2 = $("#DERIVED_REGFRM1_TITLE1");
 
@@ -7,6 +7,17 @@ window.getWindowContainer = function() {
     if (element1.length == 0 || element2.length == 0 || table_container.length == 0) return null;
     return table_container;
 }
+
+window.getWindowClassSearchFilterContainer = function() {
+    let element1 = $('td.PSGROUPBOXLABEL:contains("Search for Classes")');
+    let element2 = $("#win0divDERIVED_CLSRCH_GROUP2");
+
+
+    let container = $("#win0divDERIVED_CLSRCH_GROUP2 #ACE_DERIVED_CLSRCH_GROUP2");
+    if (element1.length == 0 || element2.length == 0 || container.length == 0) return null;
+    return container;
+}
+
 
 
 window.prettifySection = function(text) {
@@ -332,74 +343,561 @@ window.extractDataFromTableRow = function(container) {
 
 }
 
+window.showToast = function(text) {
+    // Generate the correct path for the image using chrome.runtime.getURL
+    try {
+        const imagePath = chrome.runtime.getURL('images/popup_icon_128.png');
+
+        // Check if the toast container already exists, if not, append it
+        if (!$('#liveToast').length) {
+            $('body').append(`
+              <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 999; width: 300px; height: fit-content">
+                <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="15000">
+                  <div class="toast-header">
+                    <img src="${imagePath}" class="rounded me-2" style="width: 20px; margin-right: .2rem !important;">
+                    <strong class="me-auto">BetterKnightsUI</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body"></div>
+                </div>
+              </div>
+            `);
+
+            // Update the toast message with the provided text               
+        }
+
+        $('#liveToast .toast-body').html(text);
+
+
+
+        //Show the toast using Bootstrap's toast method
+        var toast = new bootstrap.Toast($('#liveToast'));
+        toast.show();
+        return toast;
+    } catch (err) {};
+    return null;
+};
+
+window.showToastShare = function() {
+    // create popup
+    let html = "<span style='display: block'><strong style='display: block'>Enjoying the new look?</strong> Share this extension with friends!</span>";
+    let btn = '<button id="copyLinkBtn" class="btn btn-light btn-sm" style="color: #d4b032; background-color: #f9f4e6; width: 100%; text-align: center; margin-top: 5px">Copy Link</button>';
+    let shareContainer = '<input type="text" id="shareURL" value="https://chrome.google.com/webstore/detail/betterknightsui/enclfeopdchccjmnlpgcejjibahkkjkj" style="position: absolute; left: -9999px;">';
+    html += '<div style="width: 100%; text-align: center; height: fit-content">' + btn + shareContainer + '</div>';
+    let toast = window.showToast(html);
+    $("#copyLinkBtn").on("click", function() {
+        var $shareInput = $("#shareURL");
+
+        // Temporarily show the input for selection
+        $shareInput.css({
+            position: "relative",
+            left: "auto"
+        }).select();
+        $shareInput[0].setSelectionRange(0, 99999); // For mobile devices
+
+        // Attempt to copy to clipboard
+        try {
+            document.execCommand("copy");
+            toast.hide();
+            window.showToast("Link copied! Share it with friends");
+        } catch (err) {
+            alert("Copy failed. Please select and copy the link manually.");
+        }
+
+        // Hide the input after copying
+        $shareInput.css({
+            position: "absolute",
+            left: "-9999px"
+        });
+    });
+}
+
+window.handleToastShare = function() {
+    chrome.storage.sync.get('extensionShareToastCount', function(data) {
+        let launchCount = data.extensionShareToastCount || 0;
+        launchCount++;
+        chrome.storage.sync.set({
+            extensionShareToastCount: launchCount
+        });
+
+        if (launchCount <= 3 || launchCount % 10 == 0) { // Show banner after 3 launches
+            window.showToastShare();
+        }
+    });
+}
+
+
+
 window.generateTable = function(container, data) {
     container.empty();
     let table_container = $($(container.find("table tbody tr"))[1]);
     //table_container.empty();
 
     let parent_container = container.closest('tr');
-    parent_container.find("td").css("height", "fit-content");
+    parent_container.find("td").css({
+        "height": "fit-content",
+        "padding": "0px",
+        "padding-right": "0.5px"
+    });
     $("#ACE_SSR_CLSRSLT_WRK_GROUPBOX1 td").css("height", "fit-content");
 
 
-    generateTableInContainerWithData(container, data);
+    if (generateTableInContainerWithData(container, data)) {
+        // create popup
+        setTimeout(window.handleToastShare, 3000);       
+    }
+}
+
+window.toggleContainers = function(container, isActive) {
+    let new_container = $(container).find(".dimchig-new-container");
+    let old_container = $(container).find(".dimchig-old-container");
+    if (new_container.length == 0 || old_container.length == 0) return;
+
+    new_container.css("display", isActive ? "block" : "none");
+    old_container.css("display", !isActive ? "block" : "none");
 }
 
 var clicked = false;
-window.handleTable = function(idx, container) {
-    let rows = $(container).find('div[id^="win0divSSR_CLSRSLT_WRK_GROUPBOX3$"]');
-    if (rows.length == 0) return;
+window.handleTable = function(idx, container, isActive) {
 
-    let data = [];
-    rows.each(function(idx) {
-        let row_data = window.extractDataFromTableRow(this);
-        if (row_data != null) {
-            data.push(row_data);
+    let new_container = $(container).find(".dimchig-new-container");
+    let old_container = $(container).find(".dimchig-old-container");
+
+    if (new_container.length > 0 && old_container.length > 0) {
+        window.toggleContainers(container, isActive);
+    } else if (isActive) {
+        if (idx > 0) $(container).css("margin-top", "20px");
+        $(container).children('table:first').css('width', '100%');
+        $('div[id^="win0divSSR_CLSRSLT_WRK_GROUPBOX2GP"]').css({
+            'color': '#ab5b1a',
+            'font-family': 'Arimo',
+            'font-size': '14px',
+            'font-weight': '700',
+            'padding': '5px',
+            'text-align': 'center'
+        });
+        $(".PSHYPERLINK").each(function() {
+            // Check if the element has either "PTCOLLAPSE_ARROW" or "PTEXPAND_ARROW"
+            if (!$(this).hasClass("dimchig-arrow") && ($(this).hasClass("PTCOLLAPSE_ARROW") || $(this).hasClass("PTEXPAND_ARROW"))) {
+
+                // Remove any image inside the element
+                $(this).find("img").remove();
+
+                // Determine the correct icon based on the class
+                let iconClass = $(this).hasClass("PTCOLLAPSE_ARROW") ? 'fa-caret-down' : 'fa-caret-up';
+
+                // Create the FontAwesome icon element
+                let icon = $("<i class='fas " + iconClass + "'></i>");
+
+                // Apply CSS styles to the icon
+                icon.css({
+                    'color': '#ab5b1a',
+                    'margin-right': '2px',
+                    'font-size': '16px'
+                });
+
+                // Append the icon to the current element
+                $(this).append(icon);
+                $(this).addClass("dimchig-arrow");
+            }
+        });
+        //Create new        
+        let rows = $(container).find('div[id^="win0divSSR_CLSRSLT_WRK_GROUPBOX3$"]');
+        if (rows.length == 0) return;
+
+        let data = [];
+        rows.each(function(idx) {
+            let row_data = window.extractDataFromTableRow(this);
+            if (row_data != null) {
+                data.push(row_data);
+            }
+        });
+        if (data == null) return null;
+
+        // Find the child container
+        let child_container = $(container).find($('table[id^="ACE_SSR_CLSRSLT_WRK_GROUPBOX2$"]'));
+        if (child_container.length == 0) return;
+
+        let modifiable_container = $(child_container[0]);
+
+        // Copy modifiable_container and wrap it into "dimchig-old-container"
+        let copy_container = modifiable_container.clone(); // Clone the original table
+        copy_container.wrap('<div class="dimchig-old-container"></div>'); // Wrap the cloned container
+
+        // Append the wrapped copy container to the container (or wherever you want)
+        $(container).append(copy_container.parent());
+
+        // Modify the original container
+        window.generateTable(modifiable_container, data);
+
+        // Wrap the modified container into "dimchig-new-container"
+        modifiable_container.wrap('<div class="dimchig-new-container"></div>');
+
+        window.toggleContainers(container, isActive);
+
+    }
+};
+
+window.renameAndReorderCourseNumberOptions = function(courseNumberDropdown, course_number) {
+    const course_number_text = "\"" + (!course_number ? "[Course Number]" : course_number) + "\"";
+
+    // Assign data-id attributes only if they don't exist
+    courseNumberDropdown.find("option").each(function() {
+        const option = $(this);
+        const text = option.text().trim();
+
+        if (!option.attr("data-id")) {
+            switch (text) {
+                case "is exactly":
+                    option.attr("data-id", "exact");
+                    break;
+                case "greater than or equal to":
+                    option.attr("data-id", "greater_equal");
+                    break;
+                case "less than or equal to":
+                    option.attr("data-id", "less_equal");
+                    break;
+                case "contains":
+                    option.attr("data-id", "contains");
+                    break;
+            }
         }
     });
-    if (data == null) return null;
-    console.log("Generating table " + idx + "...");
-    console.log(data);
-    let child_container = $(container).find($('table[id^="ACE_SSR_CLSRSLT_WRK_GROUPBOX2$"]'));
-    if (child_container.length == 0) return;
 
-    window.generateTable($(child_container[0]), data);
+    // Update option texts based on data-id attributes to make the purpose clear
+    courseNumberDropdown.find("option").each(function() {
+        const option = $(this);
+        const id = option.attr("data-id");
+
+        switch (id) {
+            case "exact":
+                option.text("Classes with Course Number EXACTLY " + course_number_text);
+                break;
+            case "greater_equal":
+                option.text("Classes with Course Number " + course_number_text + " or HIGHER");
+                break;
+            case "less_equal":
+                option.text("Classes with Course Number " + course_number_text + " or LOWER");
+                break;
+            case "contains":
+                option.text("Classes with Course Number CONTAINING " + course_number_text);
+                break;
+        }
+    });
+
+    // Reorder options based on data-id order
+    const reorderedOptions = [
+        courseNumberDropdown.find("option[data-id='exact']"),
+        courseNumberDropdown.find("option[data-id='greater_equal']"),
+        courseNumberDropdown.find("option[data-id='less_equal']"),
+        courseNumberDropdown.find("option[data-id='contains']")
+    ];
+
+    // Append reordered options back to the dropdown
+    reorderedOptions.forEach(option => {
+        courseNumberDropdown.append(option);
+    });
+
+    // Set the first option (empty) as selected
+    courseNumberDropdown.find("option:first").prop("selected", true);
 };
 
 
-extensionEnabled = false;
+
+
+window.prettifyElementsInsideSearchClassFilterMainContainer = function(container) {
+    // Prevent duplicate cards
+    if ($(container).find("#dimchig_card").length > 0) return;    
+
+    // Create a Bootstrap card container for the form
+    const card = $("<div class='card shadow-sm border-light p-2' id='dimchig_card'></div>");
+    card.css({
+        "margin": "10px",
+        "margin-left": "5%",
+        "width": "600px", 
+    });
+    
+    const cardBody = $('<div class="card-body"></div>');    
+    card.append(cardBody);
+
+    const card_container = $("<div class='container'></div>");
+    const container_row = $("<div class='row'></div>");    
+
+    const column_left = $("<div class='col'></div>");
+    column_left.css({
+        "border-right": "2px #f9fafb solid",
+    })
+
+    const column_right = $("<div class='col'></div>");  
+
+    container_row.append(column_left);
+    container_row.append(column_right);
+    container_row.append($('<div class="w-100"></div>'));
+
+    card_container.append(container_row);
+    const container_row_last = $("<div class='row'></div>");
+    container_row_last.css({
+        "margin-top": "16px",
+    });
+    card_container.append(container_row_last);
+
+    // Add column title
+    let title = $('<h5 class="card-title mb-3 my-card-title">Search</h5>');    
+    column_left.append(title);
+
+    title = $('<h5 class="card-title mb-3 my-card-title">Advanced</h5>');
+    column_right.append(title);
+
+
+    // Helper function to create a row with a label and move input/select elements into it
+    function createRow(labelText, inputElement) {
+        const row = $(`
+            <div class="mb-2">
+                <label class="form-label mb-1">${labelText}</label>
+            </div>
+        `);
+        row.append(inputElement); // Move the existing element into the row
+        return row;
+    }
+
+    // Move elements into the card body, relative to the container
+
+    // Button: "select subject"
+    const selectSubjectButton = $(container).find("input[id^='CLASS_SRCH_WRK2_SSR_PB_SUBJ_SRCH']");
+    selectSubjectButton.remove(); // No one uses that shit            
+
+    // Text input: "Subject"
+    const subjectInput = $(container).find("input[id^='SSR_CLSRCH_WRK_SUBJECT']").addClass("form-control");
+    subjectInput.attr("placeholder", "BSC 2010").addClass("dimchig-placeholder");
+    column_left.append(createRow("Subject", subjectInput));
+
+    // Dropdown: "Location"
+    const locationDropdown = $(container).find("select[id^='SSR_CLSRCH_WRK_LOCATION']").addClass("form-select");
+    column_right.append(createRow("Location", locationDropdown));
+
+    // Dropdown: "Course Number Filter"
+    const courseNumberDropdown = $(container).find("select[id^='SSR_CLSRCH_WRK_SSR_EXACT_MATCH1']").addClass("form-select");
+    column_right.append(createRow("Course Number Condition", courseNumberDropdown));    
+
+    // Text input: "Course Number"
+    const courseNumberInput = $(container).find("input[id^='SSR_CLSRCH_WRK_CATALOG_NBR']").addClass("form-control");
+    column_left.append(createRow("Course Number", courseNumberInput));
+
+    window.renameAndReorderCourseNumberOptions(courseNumberDropdown, courseNumberInput.val());
+
+    // Text input: "Course Keyword"
+    const courseKeywordInput = $(container).find("input[id^='SSR_CLSRCH_WRK_DESCR']").addClass("form-control");
+    column_right.append(createRow("Course Keyword", courseKeywordInput));
+
+    // Dropdown: "Course Career"
+    const courseCareerDropdown = $(container).find("select[id^='SSR_CLSRCH_WRK_ACAD_CAREER']").addClass("form-select");
+    courseCareerDropdown.val("UGRD");
+    column_left.append(createRow("Course Career", courseCareerDropdown)); 
+
+    // Dropdown: "Special Course Group"
+    const specialCourseGroupDropdown = $(container).find("select[id^='ATTR_VAL']").addClass("form-select");
+    column_right.append(createRow("Special Course Group", specialCourseGroupDropdown));
+
+    // Checkbox: "Show Open Classes Only"
+    const showOpenClassesOnlyCheckbox = $(container).find("input[type='checkbox'][id^='SSR_CLSRCH_WRK_SSR_OPEN_ONLY']").addClass("form-check-input");    
+    const showOpenClassesOnlyCheckboxHidden = $(container).find("input[type='hidden'][id^='SSR_CLSRCH_WRK_SSR_OPEN_ONLY']");    
+    //if (showOpenClassesOnlyCheckbox.is(":checked")) showOpenClassesOnlyCheckbox.click();
+
+    const showOpenClassesOnlyLabel = $(`
+        <label class="form-check-label ms-1" for="${showOpenClassesOnlyCheckbox.attr("id")}">Show Open Classes Only</label>
+    `);
+    showOpenClassesOnlyLabel.css({
+        "align-self": "center",
+        "font-size": "14px",
+    });
+    const badge_open_html = '<span class="badge badge-green" style="font-size: 0.7rem;">OPEN</span>';
+    showOpenClassesOnlyLabel.html(showOpenClassesOnlyLabel.html().replace("Open", badge_open_html));
+    const checkboxContainer = $('<div class="mb-2"></div>');
+    const checkboxRow = $('<div class="row"></div>');
+    const checkboxColumnLeft = $('<div class="col" style="flex: 0"></div>');
+    const checkboxColumnRight = $('<div class="col" style="display: flex; padding-left: 0px;"></div>');
+    checkboxColumnLeft.append(showOpenClassesOnlyCheckbox);
+    checkboxColumnLeft.append(showOpenClassesOnlyCheckboxHidden);
+    checkboxColumnRight.append(showOpenClassesOnlyLabel);
+    checkboxRow.append(checkboxColumnLeft);
+    checkboxRow.append(checkboxColumnRight);
+    checkboxRow.css({
+        "margin-top": "30px",        
+    });
+    checkboxContainer.append(checkboxRow);
+
+    // Button "Search"
+    let searchButton = $(container).closest("#ACE_DERIVED_CLSRCH_GROUP2").find("#win0divCLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH");    
+    let searchButtonClone = searchButton.clone();
+    let searchButtonInput = $(searchButtonClone).find("input");
+    searchButtonInput.addClass("btn btn-primary w-100 mb-2").css("font-weight", "bold").unwrap();   
+    searchButtonInput.css({
+        "font-weight": "normal",
+        "max-width": "100%",
+    }); 
+    $(searchButtonClone).find("a").removeClass("PSPUSHBUTTON").removeClass("Left");
+    container_row_last.append(searchButtonClone);
+
+    column_left.append(checkboxContainer);
+    cardBody.append(card_container);
+
+    $(container).empty();
+    // Append the styled card to the container
+    $(container).append(card);
+
+    // Apply additional styling to the card and form elements
+    $(container).css({
+        "background-color": "#f9fafb",
+        "padding": "10px",
+        "border-radius": "10px"
+    });
+
+    card.css({
+        "background-color": "#ffffff",
+        "border": "1px solid #e3e6eb",
+        "border-radius": "8px"
+    });
+
+    cardBody.find(".form-label").css({
+        "font-weight": "600",
+        "color": "#333"
+    });
+
+    cardBody.find("input, select, button").css({
+        "border-radius": "4px",
+        "padding": "6px 8px",
+        "font-size": "14px",
+        "width": "100%",
+    });
+    showOpenClassesOnlyCheckbox.css({
+        "width": "25px",
+        "height": "25px",
+        "margin": "0px",
+        "padding": "0px",
+    });
+
+    subjectInput.on("input", function() {
+            let value = subjectInput.val().trim();
+    
+            // Regular expression to match "3 letters + optional space + 4 numbers"
+            let match = value.match(/^([a-zA-Z]{3})\s?(\d{4})$/);
+            
+            if (match) {
+                // Extract the letters and numbers from the match
+                let letters = match[1].toUpperCase();
+                let numbers = match[2];
+                
+                // Set the values of subjectInput and courseNumberInput
+                subjectInput.val(letters);
+                courseNumberInput.val(numbers);
+                searchButtonInput.focus();
+                window.renameAndReorderCourseNumberOptions(courseNumberDropdown, courseNumberInput.val());
+            }
+        });
+    courseNumberInput.on("input", function() {
+        window.renameAndReorderCourseNumberOptions(courseNumberDropdown, courseNumberInput.val());
+    });
+
+    subjectInput.focus();
+}
+
+
+window.prettifyClassSearchFilterContainer = function(isActive) {
+        let main_container = $("#win0divDERIVED_CLSRCH_SSR_GROUP_BOX_1\\$0");
+
+        //warp original content inside the toggle container
+
+        if (isActive) { 
+
+            // Copy modifiable_container and wrap it into "dimchig-old-container"
+            
+            //main_container.wrapInner('<div class="dimchig-old-container"></div>'); // Wrap the cloned container
+            //const original_container = main_container.find(".dimchig-old-container");            
+
+            //const new_container = $('<div class="dimchig-new-container"></div>');
+            //main_container.append(new_container);
+            //new_container.append(original_container.clone());
+
+            window.prettifyElementsInsideSearchClassFilterMainContainer(main_container);
+
+            //window.toggleContainers(main_container, isActive);
+
+            
+        }       
+}
+
+window.closePopupIfPresent = function() {
+    // Check if the main div with id="ptModTable_0" exists and contains the specified child elements
+    const ptModTable = $("[id^='ptModTable_']");        
+    
+    if (ptModTable.length) {
+        const popupTextSpan = ptModTable.find("#alertmsg .popupText");
+        
+        // Check if the span's text includes the specified string
+        if (popupTextSpan.length && popupTextSpan.text().includes("Students who are F-1 and J-1")) {
+            // Hide the popup
+            //ptModTable.hide(); // Example action to hide the popup            
+                let btn = $("#okbutton").find("input");
+                btn.click();                
+        }
+    }
+};
+
+
+
+window.extensionEnabled = false;
 
 window.myscan = function() {
-    checkExtensionState();
-    if (!extensionEnabled) return;
-    let table_container = window.getWindowContainer();
-    if (table_container == null) return;
+    window.checkExtensionState();
 
-    let tables = $('div[id^="win0divSSR_CLSRSLT_WRK_GROUPBOX2$"]');
-    if (tables.length == 0) return;
-    tables.each(function(i) {
-        window.handleTable(i, this);
-    });
-}
+    if (window.getWindowClassSearchTableContainer() != null) {
+            let tables = $('div[id^="win0divSSR_CLSRSLT_WRK_GROUPBOX2$"]');
+            if (tables.length == 0) return;
+            tables.each(function(i) {
+                window.handleTable(i, this, extensionEnabled);
+            });
 
-
-
-
-function checkExtensionState() {
-    chrome.storage.sync.get('extensionEnabled', function(data) {
-        let _extensionEnabled = data.extensionEnabled !== undefined ? data.extensionEnabled : true;
-        if (_extensionEnabled != extensionEnabled) {
-            extensionEnabled = _extensionEnabled;
+            if (extensionEnabled) {
+                $('#win0divDERIVED_REGFRM1_DESCR1').each(function() {
+                    // Remove the closest parent <tr> element
+                    $(this).closest('tr').remove();
+                });
+            }
         }
-    });
+        if (window.getWindowClassSearchFilterContainer() != null) {
+                window.prettifyClassSearchFilterContainer(extensionEnabled);           
+        } 
+        if (extensionEnabled) {
+                window.closePopupIfPresent();
+        }
 }
 
-$(document).ready(function() {
+
+
+
+window.checkExtensionState = function() {
+    try {
+        if (chrome && chrome.storage && chrome.storage.sync) {
+            chrome.storage.sync.get('extensionEnabled', function(data) {
+                let _extensionEnabled = data.extensionEnabled !== undefined ? data.extensionEnabled : true;
+                if (_extensionEnabled !== window.extensionEnabled) {
+                    window.extensionEnabled = _extensionEnabled;
+                }
+            });
+        }
+    } catch (ex) {};
+}
+
+$(document).ready(function() {    
     $('head').append('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">');
     $('head').append('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">');
     $('head').append('<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">');
+    $('head').append('<link rel="preconnect" href="https://fonts.googleapis.com">');
+    $('head').append('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+    $('head').append('<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Arimo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">');
 
-    setInterval(window.myscan, 300);
+    window.myscan();
+    setInterval(window.myscan, 200);
 
-    checkExtensionState();
+    window.checkExtensionState();        
 });

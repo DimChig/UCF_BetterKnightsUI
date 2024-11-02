@@ -10,7 +10,7 @@
   <script src="scripts/popup.js"></script>
   <style>
   body {
-    background-color: #f4f4f4;
+    background-color: #f4f4f4;    
   }
   
   .toggle_container {
@@ -26,7 +26,7 @@
   
   .container {
     width: 300px;
-    margin: 5px;
+    margin: 10px;
     padding: 0px;
   }
   
@@ -43,7 +43,8 @@
   }
   
   #logoImg {
-    height: 100%;
+    height: 35px;
+    align-self: center;
     margin-right: 5px;
   }
   
@@ -61,7 +62,7 @@
     align-items: center;
     padding: 10px;
     background: white;
-    margin: 5px 0px;
+    margin: 10px 0px;
     margin-top: 10px;
     border-radius: 10px;
   }
@@ -77,6 +78,7 @@
   .custom-paragraph {
     margin-top: 10px;
     text-align: center;
+    font-size: 14px;
   }
   </style>
 </head>
@@ -90,13 +92,21 @@
     <div class="toggle_container">
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" id="toggleExtension" checked>
-        <label class="form-check-label" for="flexSwitchCheckChecked">Toggle Extension ON/OFF</label>
+        <label class="form-check-label" for="flexSwitchCheckChecked" id="toggleExtensionLabel">Extension Enabled</label>
       </div>
     </div>
     <div class="about_container">
       <h3 class="custom-header">About us</h3>
       <div id="disabled_site_separator" style=""></div>
-      <p class="custom-paragraph"> Shellhacks 2024 FIU Hackathon submission for the Assurant challenge, made by Dmytro Chygarov, Santiago Henao Rojas, Diab Ali, and Anna Russel. This project aims to revamp the UCF Course Selection system to improve usability and enhance the overall experience for students. </p>
+      <p class="custom-paragraph"> 
+        Tired of the outdated 2006 design on myUCF website? This extension makes it look cleaner, prettier, and easier to use
+        <br><br>
+
+        BetterKnightsUI is our project for ShellHacks 2024, made by UCF students team:
+        <br>Dmytro Chygarov, Santiago Rojas, Diab Ali, and Anna Russel
+        <br><br>
+
+        Currenlty works on the <u title='Student Self Service -> Student Records -> Enrollment -> Add Classes -> "Search"'>class search page</u>!</p>
     </div>
   </div>
   <div>

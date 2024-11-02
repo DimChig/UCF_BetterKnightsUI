@@ -4,7 +4,8 @@ $(document).ready(function() {
 
     // Load the toggle state from Chrome storage and update the UI
     chrome.storage.sync.get('extensionEnabled', function(data) {
-        $toggleSwitch.prop('checked', data.extensionEnabled || false); // Set the initial state of the checkbox
+        let _extensionEnabled = data.extensionEnabled !== undefined ? data.extensionEnabled : true;
+        $toggleSwitch.prop('checked', _extensionEnabled); // Set the initial state of the checkbox
     });
 
     // Event listener for when the toggle is clicked
@@ -15,6 +16,9 @@ $(document).ready(function() {
         chrome.storage.sync.set({
             extensionEnabled: isEnabled
         });
+
+        // change text of "#toggleExtensionLabel" to either "Extension enabled" or "Extension disabled"
+        $('#toggleExtensionLabel').text(isEnabled ? "Extension Enabled" : "Extension Disabled");
 
         // Send message to background script to enable/disable the extension
         chrome.runtime.sendMessage({
