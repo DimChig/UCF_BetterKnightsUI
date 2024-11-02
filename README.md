@@ -1,4 +1,8 @@
 BetterKnightsUI - Enhancing UCF Course Selection:
+
+Installation:
+To install BetterKnightsUI go to https://chromewebstore.google.com/detail/betterknightsui-new-look/enclfeopdchccjmnlpgcejjibahkkjkj
+
 BetterKnightsUI is a Chrome extension developed as part of Shellhacks 2024 for the Assurant Challenge, designed to improve the UCF Course Selection system.
 
 
@@ -13,16 +17,6 @@ Toggle Functionality: Enable or disable the extension’s features with a single
 Enhanced Course Information: Quickly view course details, meeting times, locations, and professor ratings without having to navigate between multiple tabs or systems.
 
 
-Installation:
-To install BetterKnightsUI and start improving your UCF course selection experience:
-Clone this repository to your local machine:
-Copy code:
-git clone https://github.com/DimChig/UCF_BetterKnightsUI
-
-Open Google Chrome and navigate to chrome://extensions/.
-Enable Developer Mode in the top-right corner.
-Click Load unpacked and select the cloned folder containing BetterKnightsUI.
-The extension will now be available and can be toggled on or off.
 
 
 Usage:
