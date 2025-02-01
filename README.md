@@ -10,9 +10,9 @@ To use this extension, install it from the [Chrome Web Store](https://chromewebs
 
 ## Introduction
 
-At Assurant, helping people thrive in a connected world is a core purpose, and BetterKnightsUI aligns with this mission by enhancing the digital course selection experience at UCF. This extension integrates key data points, such as professor ratings and class availability, into a user-friendly interface, simplifying academic decision-making.
+BetterKnightsUI is a hackathon project built to improve the course selection experience at UCF. This browser extension makes it easier for students to find the right classes by integrating professor ratings, class availability, and other key details directly into the course selection interface.
 
-Our goal is to solve common pain points for students and faculty when navigating the course selection system. With real-time information, a sleek interface, and enhanced functionality, BetterKnightsUI empowers users to make informed choices and enjoy a more connected, digital academic environment.
+With a clean design and real-time data, BetterKnightsUI helps students make informed decisions without the hassle of switching between multiple tabs. It’s all about making registration smoother and less frustrating.
 
 ## Features
 
