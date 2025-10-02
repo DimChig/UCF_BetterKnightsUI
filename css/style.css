@@ -1,149 +1,169 @@
-.dimchig-table.table-hover tbody tr:hover {
-	background-color: #f5f5f5;
+.betterknightsui-table {
+  font-family: Arimo, "Albert Sans", system-ui, -apple-system, "Helvetica Neue",
+    Arial, sans-serif !important;
+  border-color: #f2f2f2 !important;
 }
 
-.dimchig-table tbody td {
-	vertical-align: middle;
-	text-align: center;
-	white-space: nowrap;
-	width: 1%;
+.font-betterknightsui-table {
+  font-family: Arimo, "Albert Sans", system-ui, -apple-system, "Helvetica Neue",
+    Arial, sans-serif !important;
 }
 
-.dimchig-table th {
-	white-space: nowrap;
-	text-align: left !important;
-	color: red;
+.betterknightsui-table tbody td {
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+  width: 1%;
+  background: none;
+  color: #0a0a0a !important;
 }
 
-.dimchig-table {
-    font-family: Arimo, "Albert Sans", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif !important;
-
+.betterknightsui-table tbody {
+  background: #fff;
 }
-.font-dimchig-table {
-	font-family: Arimo, "Albert Sans", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif !important;
-} 
+
+.betterknightsui-table tbody tr {
+  background: #fff !important;
+  transition: 0.2s !important;
+}
+
+.betterknightsui-table tbody tr:nth-child(even) {
+  background-color: #f7f8fa !important;
+}
+
+.betterknightsui-table tbody tr:hover {
+  background-color: #f5f5f580 !important;
+}
+
+.betterknightsui-table th {
+  white-space: nowrap;
+  text-align: left !important;
+}
 
 .text-center-important {
-    text-align: center !important;
+  text-align: center !important;
 }
 
-.PSHYPERLINK.PTCOLLAPSE_ARROW::before, .PSHYPERLINK.PTEXPAND_ARROW::before  { 
-	content: none !important; 
+.PSHYPERLINK.PTCOLLAPSE_ARROW::before,
+.PSHYPERLINK.PTEXPAND_ARROW::before {
+  content: none !important;
 }
 
 .PSPUSHBUTTON {
-	height: fit-content !important;
+  height: fit-content !important;
 }
 
 .PSPUSHBUTTON input {
-	padding: 0px !important;
-	margin: 0px !important;
-	position: relative !important;
-    top: -1px !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  position: relative !important;
+  top: -1px !important;
 }
 
 .btn-xs {
-	padding: .25rem .4rem;
-	font-size: .875rem;
-	line-height: .5;
-	border-radius: .2rem;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.875rem;
+  line-height: 0.5;
+  border-radius: 0.2rem;
 }
 
 .day-boxes {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
 .day-box {
-	margin: 0px 3px;
-	width: 28px;
-	height: 28px;
-	border: none;
-	color: #ffffff85;
-	background-color: #cbcbcb;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 0.7rem;
-	font-weight: bold;
-	transition: 0.1s;
+  margin: 0px 3px;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  color: rgb(255 255 255 / 70%);
+  background-color: #cbcbcb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  transition: 0.1s;
+  user-select: none;
 }
 
 .badge {
-	transition: 0.1s;
+  transition: 0.1s;
 }
 
 .day-box:hover {
-	transform: scale(1.1);
-	filter: brightness(1.08);
+  transform: scale(1.1);
+  filter: brightness(1.08);
 }
 
 .badge-hover:hover {
-	transform: scale(1.08);
-	filter: brightness(1.03);
+  transform: scale(1.08);
+  filter: brightness(1.03);
 }
 
 .day-box.filled {
-	background-color: #007bff !important;
-	color: #ffffffcc;
+  background-color: #007bff !important;
+  color: #ffffffcc;
 }
 
 .table .extended-col {
-	min-width: 150px;
+  min-width: 150px;
 }
 
 .table .instructor-col {
-	min-width: 250px;
+  min-width: 250px;
 }
 
 .section-col,
 .mode-col {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .section-icon,
 .mode-icon {
-	font-size: 1.5rem;
-	margin-right: 10px;
-	width: 30px;
-	text-align: center;
+  font-size: 1.5rem;
+  margin-right: 10px;
+  width: 30px;
+  text-align: center;
 }
 
 .section-info,
 .mode-info {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .badge-green {
-	color: #33ad3d !important;
-	background-color: #cbf1ce;
+  color: #33ad3d !important;
+  background-color: #cbf1ce;
 }
 
 .badge-yellow {
-	color: #d6a814 !important;
-	background-color: #f1eacb;
+  color: #d6a814 !important;
+  background-color: #f1eacb;
 }
 
 .badge-red {
-	color: #d22d2d !important;
-	background-color: #f9dbdb;
+  color: #d22d2d !important;
+  background-color: #f9dbdb;
 }
 
 .text-muted-2 {
-	color: #2125293d !important;
+  color: #2125293d !important;
 }
 
 #copyLinkBtn {
-	text-align: right;
+  text-align: right;
 }
 
 .my-card-title {
-	text-align: center;	
+  text-align: center;
 }
 
-.dimchig-placeholder::placeholder {	
-    opacity: 0.3 !important;
+.betterknightsui-placeholder::placeholder {
+  opacity: 0.3 !important;
 }
