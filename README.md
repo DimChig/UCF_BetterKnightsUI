@@ -6,7 +6,8 @@ BetterKnightsUI is a Chrome extension developed during Shellhacks 2024 for the A
 
 To use this extension, install it from the [Chrome Web Store](https://chromewebstore.google.com/detail/betterknightsui-new-look/enclfeopdchccjmnlpgcejjibahkkjkj).
 
-![BetterKnightsUI Screenshot](https://github.com/user-attachments/assets/ff9119f3-fdb0-4ccc-b888-5101fac3b75e)
+![BetterKnightsUI Screenshot](https://github.com/user-attachments/assets/4f95a69c-df20-48a4-8441-799073360940)
+
 
 ## Introduction
 
