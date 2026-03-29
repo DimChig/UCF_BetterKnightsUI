@@ -30,14 +30,14 @@ window.levenshtein = function (a, b) {
 
 async function fetchProfessorRatingsFromBackground(name) {
   return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage(
+    browser.runtime.sendMessage(
       {
         action: "fetchProfessorRatings",
         professorName: name,
       },
       (response) => {
-        if (chrome.runtime.lastError) {
-          return reject(chrome.runtime.lastError); // Handle error from the extension system
+        if (browser.runtime.lastError) {
+          return reject(browser.runtime.lastError); // Handle error from the extension system
         }
 
         if (response.error) {
@@ -52,14 +52,14 @@ async function fetchProfessorRatingsFromBackground(name) {
 
 async function fetchProfessorSigleRatingFromBackground(url) {
   return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage(
+    browser.runtime.sendMessage(
       {
         action: "fetchProfessorSigleRatingFromBackground",
         url: url,
       },
       (response) => {
-        if (chrome.runtime.lastError) {
-          return reject(chrome.runtime.lastError); // Handle error from the extension system
+        if (browser.runtime.lastError) {
+          return reject(browser.runtime.lastError); // Handle error from the extension system
         }
 
         if (response.error) {

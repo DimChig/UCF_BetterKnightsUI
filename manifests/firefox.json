@@ -1,24 +1,34 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "BetterKnightsUI - New Look for myUCF",
   "version": "1.7",
   "description": "Makes myUCF cleaner and easier to navigate for a better course browsing experience!",
-  "permissions": ["storage"],
-  "host_permissions": ["*://www.ratemyprofessors.com/"],
-  "action": {
+  "permissions": ["storage", "*://www.ratemyprofessors.com/*"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "betterknightsui@diab.com",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "images/popup_icon.png"
   },
-  "icons": {},
+  "icons": {
+    "128": "images/popup_icon_128.png"
+  },
   "web_accessible_resources": [
-    {
-      "resources": ["images/popup_icon_128.png"],
-      "matches": ["<all_urls>"]
-    }
+    "images/popup_icon_128.png",
+    "css/webfonts/*",
+    "css/fonts/*"
   ],
   "content_scripts": [
     {
       "js": [
+        "scripts/browser-polyfill.min.js",
         "scripts/jquery.min.js",
         "scripts/main_script.js",
         "scripts/table_generator.js",
@@ -27,7 +37,14 @@
         "scripts/professorNameMatching.js",
         "scripts/bootstrap.min.js"
       ],
-      "css": ["css/style.css", "css/datatables.min.css"],
+      "css": [
+        "css/vendor/bootstrap.min.css",
+        "css/vendor/fontawesome.min.css",
+        "css/vendor/jquery.dataTables.min.css",
+        "css/vendor/google-fonts.css",
+        "css/style.css",
+        "css/datatables.min.css"
+      ],
       "matches": [
         "https://csprod-ss.net.ucf.edu/*/CSPROD/STUDENT/*",
         "https://my.ucf.edu/psp/IHPROD/EMPLOYEE/CSPROD/*"
@@ -37,6 +54,6 @@
     }
   ],
   "background": {
-    "service_worker": "scripts/background.js"
+    "scripts": ["scripts/browser-polyfill.min.js", "scripts/background.js"]
   }
 }

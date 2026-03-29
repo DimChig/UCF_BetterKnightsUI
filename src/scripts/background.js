@@ -1,4 +1,6 @@
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+importScripts("browser-polyfill.min.js");
+
+browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "fetchProfessorRatings") {
     fetchProfessorRatings(message.professorName)
       .then((data) =>

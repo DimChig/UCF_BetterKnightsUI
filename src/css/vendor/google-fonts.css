@@ -1,0 +1,182 @@
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url(../fonts/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9AX7ofy.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(../fonts/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9CX74fy.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(../fonts/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9BJ74fy.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9AX74fy.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9Al74fy.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9DJ6Ify.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9Dw6Ify.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url(../fonts/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9CX6Ify.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(../fonts/i7dfIFdwYjGaAMFtZd_QA1Zeelmy79QJ1HOSY9C-6Ify.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(../fonts/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHq5L_rA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(../fonts/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHK5P_rA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(../fonts/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSH9ZP_rA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHq5P_rA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHmZP_rA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHdZT_rA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHTJT_rA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(../fonts/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHK5T_rA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(../fonts/i7dZIFdwYjGaAMFtZd_QA3xXSKZqhr-TenSHApT_rA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Arimo';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/P5sdzZCDf9_T_10c3i9MeUcyat4iJY-ERBrE.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Arimo';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/P5sdzZCDf9_T_10c3i9MeUcyat4iJY-2RBrE.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Arimo';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/P5sdzZCDf9_T_10c3i9MeUcyat4iJY9aQxrE.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Arimo';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/P5sdzZCDf9_T_10c3i9MeUcyat4iJY9jQxrE.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Arimo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/P5sfzZCDf9_T_3cV7NCUECyoxNk37cxsBw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Arimo';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/P5sfzZCDf9_T_3cV7NCUECyoxNk338xsBw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Arimo';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/P5sfzZCDf9_T_3cV7NCUECyoxNk3M8tsBw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Arimo';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/P5sfzZCDf9_T_3cV7NCUECyoxNk3CstsBw.ttf) format('truetype');
+}
