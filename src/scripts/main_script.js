@@ -364,9 +364,9 @@ window.extractDataFromTableRow = function (container) {
 };
 
 window.showToast = function (text) {
-  // Generate the correct path for the image using chrome.runtime.getURL
+  // Generate the correct path for the image using browser.runtime.getURL
   try {
-    const imagePath = chrome.runtime.getURL("images/popup_icon_128.png");
+    const imagePath = browser.runtime.getURL("images/popup_icon_128.png");
 
     // Check if the toast container already exists, if not, append it
     if (!$("#liveToast").length) {
@@ -440,10 +440,10 @@ window.showToastShare = function () {
 };
 
 window.handleToastShare = function () {
-  chrome.storage.sync.get("extensionShareToastCount", function (data) {
+  browser.storage.sync.get("extensionShareToastCount", function (data) {
     let launchCount = data.extensionShareToastCount || 0;
     launchCount++;
-    chrome.storage.sync.set({
+    browser.storage.sync.set({
       extensionShareToastCount: launchCount,
     });
 
@@ -1014,8 +1014,8 @@ window.myscan = function () {
 
 window.checkExtensionState = function () {
   try {
-    if (chrome && chrome.storage && chrome.storage.sync) {
-      chrome.storage.sync.get("extensionEnabled", function (data) {
+    if (typeof browser !== "undefined" && browser.storage && browser.storage.sync) {
+      browser.storage.sync.get("extensionEnabled", function (data) {
         let _extensionEnabled =
           data.extensionEnabled !== undefined ? data.extensionEnabled : true;
         if (_extensionEnabled !== window.extensionEnabled) {
@@ -1027,25 +1027,6 @@ window.checkExtensionState = function () {
 };
 
 $(document).ready(function () {
-  $("head").append(
-    '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">'
-  );
-  $("head").append(
-    '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
-  );
-  $("head").append(
-    '<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">'
-  );
-  $("head").append(
-    '<link rel="preconnect" href="https://fonts.googleapis.com">'
-  );
-  $("head").append(
-    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-  );
-  $("head").append(
-    '<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Arimo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">'
-  );
-
   window.myscan();
   setInterval(window.myscan, 200);
 

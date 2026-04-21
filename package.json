@@ -1,0 +1,21 @@
+{
+  "name": "ucf_betterknightsui",
+  "version": "1.0.0",
+  "description": "BetterKnightsUI is a Chrome extension developed during Shellhacks 2024 for the Assurant Challenge, designed to improve the UCF Course Selection system.",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.js",
+    "build:chrome": "node build.js chrome",
+    "build:safari": "node build.js safari"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:32845/git/diab-ma/UCF_BetterKnightsUI"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webextension-polyfill": "^0.12.0"
+  }
+}

@@ -1,0 +1,5 @@
+node_modules/
+build/
+safari-app/
+.DS_Store
+betterknightsui-firefox.zip
